@@ -1,0 +1,15 @@
+﻿<div>
+   
+<form ng-submit="controller.sendMessage() ">
+    
+    <label>To</label>
+    <input class="form-control" id="to" type="text" ng-model="controller.message.userName" ><br />
+    <label>Message</label>
+    <input class="form-control" id="text" type="text" placeholder="Message" ng-model="controller.message.text"><br />
+    <input class="btn btn-primary" id="post" type="submit" value="Post" /><br />
+
+</form>
+    <div id="results"></div>
+
+</div>
+

@@ -1,0 +1,37 @@
+﻿
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{controller.post.title}}</h3>
+            </div>
+
+            <div class="panel-body">
+                {{controller.post.message}}
+            </div>
+            <div class="panel-footer">
+                <a href="/posts/createReply/{{controller.post.id}}" class="btn btn-primary btn-xs">Reply</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default" ng-repeat="replies in controller.post.reply">
+
+            <div class="panel-heading">
+
+                <h3 class="panel-title">{{replies.title}}</h3>
+            </div>
+            <div class="panel-body">
+                {{replies.message}}
+
+            </div>
+            <div class="panel-footer">
+                <a href="/posts/createReply/{{controller.post.id}}" class="btn btn-primary btn-xs">Reply</a>
+            </div>
+        </div>
+    </div>
+</div>
+
