@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using HiP4.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using HiP4.ViewModels;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -38,8 +39,28 @@ namespace HiP4.API
         [Authorize]
         public IActionResult GetUserReplies()
         {
-            var userId = _userManager.GetUserId(this.User);
+            var userId = _userManager.GetUserName(this.User);
             var replies =_service.GetUserReplies(userId);
+            return Ok(replies);
+        }
+
+        [HttpGet("{id}")]
+        [Route("getrepliestoreply")]
+        [Authorize]
+        public IActionResult GetRepliesToReply(int id)
+        {
+
+            var replies = _service.GetRepliesToReply(id);
+            return Ok(replies);
+        }
+
+        [HttpGet( "{id}")]
+        [Route("getpostreplies")]
+        [Authorize]
+        public IActionResult GetPostReplies(int id)
+        {
+            
+            var replies = _service.GetPostReplies(id);
             return Ok(replies);
         }
 
@@ -54,9 +75,11 @@ namespace HiP4.API
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        [Route("getreply")]
+        public IActionResult GetReply(int id)
         {
-            return "value";
+            var reply = _service.GetReply(id);
+            return Ok(reply);
         }
 
         // POST api/values
@@ -64,25 +87,34 @@ namespace HiP4.API
        // [Authorize]
         public IActionResult Post([FromBody]Replies reply)
         {
-            //var userId = _userManager.GetUserId(this.User);
-            //reply.User = userId;
-            //reply.IsActive = true;
-            //reply.TimeCreated = DateTime.Today;
-            _service.SaveReply(reply, reply.PostId);
+            var userId = _userManager.GetUserName(this.User);
+            reply.User = userId;
+            reply.IsActive = true;
+            reply.TimeCreated = DateTime.Today;
+
+
+
+
+            _service.SaveReply(reply);
 
             return Ok(reply);
         }
-        //if (reply.Id == 0)
-        //{
 
-        //    var userId = _userManager.GetUserId(this.User);
+        [HttpPost()]
+        [Route("savereplytoreply")]
+        [Authorize]
+        public IActionResult SaveReplyToReply([FromBody]Replies reply)
+        {
+            var userId = _userManager.GetUserName(this.User);
+            reply.User = userId;
+            reply.IsActive = true;
+            reply.TimeCreated = DateTime.Today;
 
-        //    reply.User = userId;
-        //    reply.IsActive = true;
-        //    reply.TimeCreated = DateTime.Today;
+            _service.SaveReply(reply, reply.User, reply.IsActive, reply.TimeCreated);
 
+            return Ok(reply);
+        }
 
-        //}
 
 
 
@@ -90,8 +122,10 @@ namespace HiP4.API
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public IActionResult Put(int id, [FromBody]Replies reply)
         {
+            _service.UpdateReply(reply);
+            return Ok(reply);
         }
 
         // DELETE api/values/5

@@ -5,12 +5,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using HiP4.Data;
 
-namespace HiP4.data.migrations
+namespace HiP4.data.migration
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180209001532_Added_Intial")]
+    partial class Added_Intial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rc2-20901")
@@ -75,6 +76,8 @@ namespace HiP4.data.migrations
 
                     b.Property<bool>("IsActive");
 
+                    b.Property<int>("Likes");
+
                     b.Property<string>("Message");
 
                     b.Property<DateTime>("TimeCreated");
@@ -105,11 +108,13 @@ namespace HiP4.data.migrations
 
                     b.Property<bool>("IsActive");
 
+                    b.Property<int>("Likes");
+
                     b.Property<string>("Message");
 
                     b.Property<int>("PostId");
 
-                    b.Property<int?>("PostsId");
+                    b.Property<int>("ReplyId");
 
                     b.Property<DateTime>("TimeCreated");
 
@@ -122,8 +127,6 @@ namespace HiP4.data.migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ApplicationUserId");
-
-                    b.HasIndex("PostsId");
 
                     b.HasIndex("UserId");
 
@@ -287,10 +290,6 @@ namespace HiP4.data.migrations
                     b.HasOne("HiP4.Models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("ApplicationUserId");
-
-                    b.HasOne("HiP4.Models.Posts")
-                        .WithMany()
-                        .HasForeignKey("PostsId");
 
                     b.HasOne("HiP4.Models.User")
                         .WithMany()

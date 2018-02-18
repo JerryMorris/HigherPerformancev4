@@ -5,19 +5,19 @@
 
 
         constructor($resource: ng.resource.IResourceService) {
-            this.userResource = $resource('/api/user');
+            this.userResource = $resource('/api/user/:id');
 
         }
 
-        saveUser(data) {
-            console.log(data);
+        addUser(data) {
+            debugger;
             return this.userResource.save(data).$promise;
             
             }
 
 
         }
-
+    angular.module('HiP4').service('userService', UserService);
     }
 
 

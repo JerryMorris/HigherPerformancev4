@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace HiP4.data.migrations
+namespace HiP4.data.migration
 {
-    public partial class Added_HiP4 : Migration
+    public partial class Added_Intial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -193,6 +193,7 @@ namespace HiP4.data.migrations
                     ApplicationUserId = table.Column<string>(nullable: true),
                     Category = table.Column<string>(nullable: true),
                     IsActive = table.Column<bool>(nullable: false),
+                    Likes = table.Column<int>(nullable: false),
                     Message = table.Column<string>(nullable: true),
                     TimeCreated = table.Column<DateTime>(nullable: false),
                     Title = table.Column<string>(nullable: true),
@@ -225,8 +226,10 @@ namespace HiP4.data.migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ApplicationUserId = table.Column<string>(nullable: true),
                     IsActive = table.Column<bool>(nullable: false),
+                    Likes = table.Column<int>(nullable: false),
                     Message = table.Column<string>(nullable: true),
-                    PostsId = table.Column<int>(nullable: true),
+                    PostId = table.Column<int>(nullable: false),
+                    ReplyId = table.Column<int>(nullable: false),
                     TimeCreated = table.Column<DateTime>(nullable: false),
                     Title = table.Column<string>(nullable: true),
                     User = table.Column<string>(nullable: true),
@@ -239,12 +242,6 @@ namespace HiP4.data.migrations
                         name: "FK_Reply_AspNetUsers_ApplicationUserId",
                         column: x => x.ApplicationUserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Reply_Post_PostsId",
-                        column: x => x.PostsId,
-                        principalTable: "Post",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -279,11 +276,6 @@ namespace HiP4.data.migrations
                 name: "IX_Reply_ApplicationUserId",
                 table: "Reply",
                 column: "ApplicationUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Reply_PostsId",
-                table: "Reply",
-                column: "PostsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reply_UserId",
@@ -329,6 +321,9 @@ namespace HiP4.data.migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Post");
+
+            migrationBuilder.DropTable(
                 name: "Reply");
 
             migrationBuilder.DropTable(
@@ -350,13 +345,10 @@ namespace HiP4.data.migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Post");
+                name: "User");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
-
-            migrationBuilder.DropTable(
-                name: "User");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

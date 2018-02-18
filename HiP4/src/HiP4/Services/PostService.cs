@@ -20,16 +20,23 @@ namespace HiP4.Services
         //resturn all acitve post
         public List<Posts> GetActivePost()
         {
-            var posts = _repo.Query<Posts>().Where(p => p.IsActive == true).Include(p => p.Reply).ToList();
+            var posts = _repo.Query<Posts>().Where(p => p.IsActive == true).ToList();
             return posts;
 
+        }
+
+        public List<Posts> GetPostByTopicId(int topicId)
+        {
+            var posts = _repo.Query<Posts>().Where(p => p.TopicId == topicId).ToList();
+
+            return posts;
         }
         //get user post
         public List<Posts> GetUserPosts(string id)
         {
-            var user = _repo.Query<ApplicationUser>().Where(u => u.Id == id).Include(u => u.Post).FirstOrDefault();
-            user.Post = user.Post.Where(p => p.IsActive == true).ToList();
-            var posts = user.Post.ToList();
+            var posts = _repo.Query<Posts>().Where(p => p.User == id).ToList();
+
+
             return posts;
         }
 
@@ -40,12 +47,12 @@ namespace HiP4.Services
             return posts;
         }
 
-        public Posts GetPost (int id)
+        public Posts GetPost(int postId)
         {
-           
-            var post = _repo.Query<Posts>().Where(p => p.Id == id).Include(p => p.Reply).FirstOrDefault();
-           
-           return post;
+
+            var post = _repo.Query<Posts>().Where(p => p.Id == postId).FirstOrDefault();
+
+            return post;
         }
         //create a new user post
         public void SavePost(Posts post, string id)
@@ -53,12 +60,19 @@ namespace HiP4.Services
             var user = _repo.Query<ApplicationUser>().Where(u => u.Id == id).Include(u => u.Post).FirstOrDefault();
             _repo.Add(post);
             _repo.SaveChanges();
-       }
+        }
         public void SaveReply(Replies reply, int id)
         {
-            var post = _repo.Query<Posts>().Where(p => p.Id == id).Include(p => p.Reply).FirstOrDefault();
+            var post = _repo.Query<Posts>().Where(p => p.Id == id).FirstOrDefault();
 
             _repo.Add(post);
+            _repo.SaveChanges();
+        }
+
+        public void UpdatePost(Posts post)
+        {
+            
+            _repo.Update(post);
             _repo.SaveChanges();
         }
 
@@ -69,7 +83,6 @@ namespace HiP4.Services
             _repo.SaveChanges();
 
         }
-      
 
         
     }

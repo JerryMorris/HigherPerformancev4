@@ -2,38 +2,50 @@
 <head>
     <title>HiP4</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/cyborg/bootstrap.min.css" rel="stylesheet" integrity="sha384-uSbimwRPo7PKyTL6azsx1CcBce/X9Qg+wX1MAjNV1gAkSXYveZbZeMMyJghdsSol" crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <base href="/" />
 </head>
 <body ng-controller="AccountController as account">
-    <div class="container">
-        <h1>HiP4</h1>
-        <p>Higher Performance</p>
-        <div class="bs-component">
-            <ul class="nav nav-pills">
-                <li> <a href="/">Home</a> </li>
-                <li><a href="/about">About</a></li>
-                <li><a href="/posts">Posts</a></li>
-                <li><a href="/secret">Secret</a></li>
-                <li><a href="/admin">Admin</a></li>
-                <li><a href="/user">User</a></li>
-                <li><a href="/chat">Chat</a></li>
-                <li><a href="/login" ng-show="!account.isLoggedIn()">Login</a></li>
-                <li><a href="#" ng-click="account.logout()" ng-show="account.isLoggedIn()">Logout</a></li>
+    <div class="container-fluid">
 
-                <li>
-            </ul>
+        <nav class="navbar navbar-inverse">
 
-            <div ng-show="account.isLoggedIn()">
-                [{{account.getUserName()}}]
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">HiP4</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/">Home</a></li>
+                    <li><a href="/posts/create">Post</a></li>
+                    <li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                    <li><a href="/login" ng-show="!account.isLoggedIn()"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    <li><a href="#" ng-click="account.logout()" ng-show="account.isLoggedIn()">Logout</a></li>
+                </ul>
             </div>
 
+        </nav>
 
+        <div ng-show="account.isLoggedIn()">
+            Welcome {{account.getUserName()}}
         </div>
-        <hr />
+
+
+
+        
 
         <ui-view></ui-view>
-    </div>
 
+    </div>
     <!-- Library Files -->
     <script src="~/lib/angular/angular.js"></script>
     <script src="~/lib/angular-resource/angular-resource.js"></script>
@@ -42,15 +54,18 @@
     <script src="~/lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="~/lib/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="~/lib/firebase/firebase.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/angular-file-upload/dist/angular-file-upload.js"></script>
     <script src="~/lib/angularfire/dist/angularfire.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.2.0/firebase.js"></script>
-    @*<script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-auth.js"></script>*@
+    <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-auth.js"></script>
     <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
     <script src="https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
 
     <!-- App Files-->
     <script src="~/ngapp/app.js"></script>
-    
+
     <script src="~/ngapp/services/services.js"></script>
     <script src="~/ngApp/services/topicsService.js"></script>
     <script src="~/ngApp/services/postService.js"></script>
@@ -64,9 +79,10 @@
     <script src="~/ngApp/controllers/replyController.js"></script>
     <script src="~/ngApp/controllers/CreatePostController.js"></script>
     <script src="~/ngApp/controllers/postToEditController.js"></script>
-    <script src="~/ngApp/controllers/postDetailController.js"></script>
+
+    <script src="~/ngApp/controllers/viewPostController.js"></script>
     <script src="~/ngApp/controllers/createReplyController.js"></script>
-    <script src="~/ngApp/controllers/chatContoller.js"></script>
+
     <!-- Security -->
     <script src="~/ngapp/controllers/accountcontroller.js"></script>
     <script src="~/ngapp/services/accountservice.js"></script>

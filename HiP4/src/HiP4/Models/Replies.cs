@@ -11,7 +11,12 @@ namespace HiP4.Models
         public string Title { get; set; }
         public string Message { get; set; }
         public string User { get; set; }
+        public int ReplyId { get; set; }
         public int PostId { get; set; }
+        public int Likes { get; set; }
+
+
+
 
 
     }

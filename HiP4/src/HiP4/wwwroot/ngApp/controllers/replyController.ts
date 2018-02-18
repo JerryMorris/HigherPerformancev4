@@ -6,7 +6,8 @@
         public postId;
         public post;
         constructor(
-            private postsService: HiP4.Services.PostsService,
+            private replyService: HiP4.Services.ReplyService,
+            private postsService: HiP4.Services.PostsService, 
             private $state: angular.ui.IStateService,
             $stateParams: angular.ui.IStateParamsService) {
             this.replyVm = {};
@@ -15,22 +16,19 @@
         }
 
         getPost() {
-            
+
             this.post = this.postsService.getPost(this.postId);
         }
 
         saveReply() {
-            console.log(this.postId);
-            this.replyVm.title = this.reply.title;
-            this.replyVm.message = this.reply.message;
-            this.replyVm.postId = this.postId;
-            this.replyVm.isActive = "true";
-            this.postsService.saveReply(this.replyVm).then(() => {
-            this.$state.go("posts");
+            debugger;
+            this.reply.postId = this.postId;
+            this.replyService.saveReply(this.reply).then(() => {
+                this.$state.go("posts");
 
-           });
+            });
 
-       }
+        }
 
         cancel() {
             this.$state.go("posts");

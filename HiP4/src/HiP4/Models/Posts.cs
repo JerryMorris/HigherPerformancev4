@@ -12,7 +12,8 @@ namespace HiP4.Models
         public int TopicId { get; set; }
         public string Message { get; set; }
         public string Category { get; set; }
-        public ICollection<Replies> Reply { get; set; }
+        public int Likes { get; set; }
         public string User { get; set; }
+        
     }
 }

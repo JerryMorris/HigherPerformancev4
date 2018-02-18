@@ -22,7 +22,9 @@ namespace HiP4.Services {
         }
 
 
-        public login(loginUser) {
+        public login(loginUser)
+        {
+            debugger;
             return this.$q((resolve, reject) => {
                 this.$http.post('/api/account/login', loginUser).then((result) => {
                         this.storeUserInfo(result.data);

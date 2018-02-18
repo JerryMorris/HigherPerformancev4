@@ -19,19 +19,19 @@ namespace HiP4.Data
             context.Database.EnsureCreated();
 
             // Ensure Stephen (IsAdmin)
-            var stephen = await userManager.FindByNameAsync("Stephen.Walther@CoderCamps.com");
-            if (stephen == null)
+            var jerry = await userManager.FindByNameAsync("j78morris@mchsi.com");
+            if (jerry == null)
             {
                 // create user
-                stephen = new ApplicationUser
+                jerry = new ApplicationUser
                 {
-                    UserName = "Stephen.Walther@CoderCamps.com",
-                    Email = "Stephen.Walther@CoderCamps.com"
+                    UserName = "j78morris@mchsi.com",
+                    Email = "j78morris@mchsi.com"
                 };
-                await userManager.CreateAsync(stephen, "Secret123!");
+                await userManager.CreateAsync(jerry, "Money78$");
 
                 // add claims
-                await userManager.AddClaimAsync(stephen, new Claim("IsAdmin", "true"));
+                await userManager.AddClaimAsync(jerry, new Claim("IsAdmin", "true"));
             }
 
             // Ensure Mike (not IsAdmin)

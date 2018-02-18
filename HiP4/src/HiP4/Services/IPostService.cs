@@ -8,9 +8,11 @@ namespace HiP4.Services
         void DeletePost(int id);
         List<Posts> GetActivePost();
         List<Posts> GetAllPosts();
-        Posts GetPost(int id);
+        Posts GetPost(int postId);
+        List<Posts> GetPostByTopicId(int topicId);
         List<Posts> GetUserPosts(string id);
         void SavePost(Posts post, string id);
-        
+        void SaveReply(Replies reply, int id);
+        void UpdatePost(Posts post);
     }
 }

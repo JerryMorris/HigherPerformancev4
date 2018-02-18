@@ -29,7 +29,7 @@ namespace HiP4.API
         // GET: api/values
         [HttpGet]
         [Route("getactiveposts")]
-        public IActionResult Get()
+        public IActionResult GetAtivePost()
         {
             var post = _service.GetActivePost();
             return Ok(post);
@@ -40,19 +40,29 @@ namespace HiP4.API
         [Authorize]
         public IActionResult GetUserPosts()
         {
-            var userId = _userManager.GetUserId(this.User);
+            var userId = _userManager.GetUserName(this.User);
             var posts = _service.GetUserPosts(userId);
             return Ok(posts);
         }
 
         [HttpGet]
         [Route("getallposts")]
-        [Authorize(Policy = "AdminOnly")]
+        //[Authorize(Policy = "AdminOnly")]
         public IActionResult GetAllPosts()
         {
             var posts = _service.GetAllPosts();
             return Ok(posts);
         }
+
+        [HttpGet("{topicid}")]
+        [Route("getpostbytopipcid")]
+        public IActionResult GetPostByTopicId(int topicId)
+        {
+
+            var post = _service.GetPostByTopicId(topicId);
+            return Ok(post);
+        }
+
         // GET api/values/5
         [HttpGet("{id}")]
         [Route("getpost")]
@@ -66,7 +76,7 @@ namespace HiP4.API
         // POST api/values
         [HttpPost]
         [Authorize]
-        public IActionResult Post(int id,[FromBody]Posts post)
+        public IActionResult Post(int id, [FromBody]Posts post)
         {
 
             if (post.Id == 0)
@@ -80,7 +90,7 @@ namespace HiP4.API
                         post.TopicId = 2;
                         break;
                     case " Chassis":
-                        post.TopicId = 3;
+                        post.TopicId = 8;
                         break;
                     case "Drive Train":
                         post.TopicId = 4;
@@ -100,7 +110,7 @@ namespace HiP4.API
                     case "Wheels and Tires":
                         post.TopicId = 9;
                         break;
-                    case "Sell ot Trade":
+                    case "Sell or Trade":
                         post.TopicId = 10;
                         break;
                     case "Photos":
@@ -110,34 +120,38 @@ namespace HiP4.API
                         post.TopicId = 1;
                         break;
                 }
-                var userId = _userManager.GetUserId(this.User);
+                var userId = _userManager.GetUserName(this.User);
                 post.User = userId;
                 post.IsActive = true;
                 post.TimeCreated = DateTime.Today;
 
                 _service.SavePost(post, post.User);
             }
-           
+
 
 
 
             return Ok(post);
         }
 
-       
+
         // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public IActionResult Put(int id, [FromBody]Posts post)
         {
+
+            _service.UpdatePost(post);
+
+              return Ok(post);
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-             _service.DeletePost(id);
-           
-           
+            _service.DeletePost(id);
+
+
         }
     }
 }

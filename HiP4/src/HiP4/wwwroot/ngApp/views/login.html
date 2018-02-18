@@ -19,12 +19,12 @@
 
     <form ng-submit="controller.login()">
         <div>
-            <label>Email:</label>
-            <input ng-model="controller.loginUser.email" />
+            <label>UserName:</label>
+            <input ng-model="controller.loginUser.userName" />
         </div>
         <div>
             <label>Password:</label>
-            <input ng-model="controller.loginUser.password" />
+            <input type="password" ng-model="controller.loginUser.password" />
         </div>
         <input type="submit" value="Login" />
         <a href="/register">Register</a>

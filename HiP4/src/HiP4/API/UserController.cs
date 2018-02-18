@@ -47,7 +47,7 @@ namespace HiP4.API
 
             }
 
-                return Ok();
+                return Ok(user);
         }
 
         // PUT api/values/5

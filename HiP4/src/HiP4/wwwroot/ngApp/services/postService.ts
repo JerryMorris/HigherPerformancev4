@@ -2,9 +2,9 @@
 
     export class PostsService {
         private postResource;
-        private replyResource;
+        
         constructor($resource: ng.resource.IResourceService) {
-            this.postResource = $resource('/api/posts/:id', null, {
+            this.postResource = $resource('/api/posts/', null, {
                 getActivePosts: {
                     method: 'GET',
                     url: '/api/posts/getactiveposts',
@@ -12,7 +12,8 @@
                 },
                 getUserPosts: {
                     method: 'GET',
-                    url: '/api/post/getuserposts'
+                    url: '/api/posts/getuserposts',
+                    isArray: true
                    
                    
                 },
@@ -23,33 +24,43 @@
                 },
                 getPost: {
                     method: 'GET',
-                    url: '/api/posts/getpost/:id',
-                    isArray: true
-                }
+                    url: '/api/posts/getpost/:postid'
+                
+                },
+                getPostByTopicId: {
+                    method: 'GET',
+                    url: '/api/posts/getpostbytopipcid/:topicid',
+                    isArray:true
+                    
+                },
+                update: {
+                    method: 'PUT',
+                    url: '/api/posts/put'
+                } 
 
             });
-            this.replyResource = $resource('/api/replies/:id', null, {
-
-                getAllReplies: {
-                    method: 'GET',
-                    url: '/api/replies/getallreplies',
-                    isArray: true
-                },
-
-                getUserReplies: {
-                    method: 'GET',
-                    url: '/api/replies/getuserreplies',
-                    isArray: true
-                }
-            }
-            );
+           
         }
 
-        getActivePosts() {
+        updatePost(data)
+        {
+            debugger;
+            return this.postResource.update(data).$promise;
+        }
+        getPostbyTopicId(topicId)
+        {
+            debugger;
+            return this.postResource.getPostByTopicId({topicId });
+        }
+
+        getActivePosts() 
+        {
             return this.postResource.getActivePosts();
         }
 
-        getUserPosts() {
+        getUserPosts()
+        {
+            debugger;
             return this.postResource.getUserPosts();
 
         }
@@ -57,35 +68,24 @@
         getAllPosts() {
             return this.postResource.getAllPosts();
         }
-        getAllReplies() {
-            return this.replyResource.getAllReplies();
-        }
-        getUserReplies() {
-            return this.replyResource.getUserReplies();
-
-        }
+        
 
         //CRUD-Create
         savePost(data) {
             console.log(data);
             return this.postResource.save(data).$promise;
         }
-       
-        saveReply(data) {
-            debugger;
-            return this.replyResource.save(data).$promise;
 
-        }
+        savePostLike() { }
+       
         //CRUD-Read
         getPosts() {
             return this.postResource.query();
         }
-        getReplies(id) {
-            return this.replyResource.get({ id: id });
-        }
+       
         getPost(postId) {
-
-            return this.postResource.get({ id: postId });
+            debugger;
+            return this.postResource.getPost({ id: postId });
         }
         //CrUD Update
 
@@ -94,8 +94,8 @@
         }
 
         //CRUD-Delete
-        deletePost(postsId) {
-            return this.postResource.delete({ id: postsId }).$promise;
+        deletePost(id) {
+            return this.postResource.delete(id).$promise;
 
         }
 

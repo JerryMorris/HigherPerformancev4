@@ -1,6 +1,6 @@
 namespace HiP4 {
 
-    angular.module('HiP4', ['ui.router', 'ngResource', 'ui.bootstrap', 'firebase']).config((
+    angular.module('HiP4', ['ui.router', 'ngResource', 'ui.bootstrap']).config((
         $stateProvider: ng.ui.IStateProvider,
         $urlRouterProvider: ng.ui.IUrlRouterProvider,
         $locationProvider: ng.ILocationProvider
@@ -10,7 +10,7 @@ namespace HiP4 {
             .state('home', {
                 url: '/',
                 templateUrl: '/ngApp/views/home.html',
-                controller: HiP4.Controllers.HomeController,
+                controller: HiP4.Controllers.TopicsController,
                 controllerAs: 'controller'
             })
             .state('secret', {
@@ -49,22 +49,28 @@ namespace HiP4 {
                 controller: HiP4.Controllers.CreatePostController,
                 controllerAs: 'controller'
             })
-            .state('post/details', {
-                url: '/posts/details/:id',
-                templateUrl: '/ngApp/views/postPage.html',
-                controller: HiP4.Controllers.PostDetailController,
+            .state('post/viewPost', {
+                url: '/posts/viewPost/:id',
+                templateUrl: '/ngApp/views/viewPost.html',
+                controller: HiP4.Controllers.ViewPostController,
                 controllerAs: 'controller'
             })
             .state('createReply', {
                 url: '/posts/createReply/:id',
                 templateUrl: '/ngApp/views/createReply.html',
-                controller: HiP4.Controllers.ReplyController,
+                controller: HiP4.Controllers.CreateReplyController,
                 controllerAs: 'controller'
             })
+            //.state('replyToReply', {
+            //    url: '/reply/replyToReply/:id',
+            //    templateUrl: '/ngApp/views/replytoreply.html',
+            //    controller: HiP4.Controllers.ReplyReplyController,
+            //    controllerAs: 'controller'
+            //})
             .state('post/delete', {
                 url: '/posts/delete/:id',
                 templateUrl: '/ngApp/views/delete.html',
-                controller: HiP4.Controllers.PostEditController,
+                controller: HiP4.Controllers.DeletePostController,
                 controllerAs: 'controller'
             })
             .state('post/edit', {
@@ -76,7 +82,7 @@ namespace HiP4 {
             .state('user', {
                 url: '/user',
                 templateUrl: '/ngApp/views/user.html',
-                controller: HiP4.Controllers.UserPostController,
+                controller: HiP4.Controllers.PostsController,
                 controllerAs: 'controller'
             })
             .state('admin', {
@@ -85,12 +91,13 @@ namespace HiP4 {
                 controller: HiP4.Controllers.AdminPostController,
                 controllerAs: 'controller'
             })
-            .state('chat', {
-                url: '/chat',
-                templateUrl: '/ngApp/views/chat.html',
-                controller: HiP4.Controllers.ChatController,
+            .state('Photo', {
+                url: '/photo',
+                templateUrl: '/ngApp/views/photoUpload.html',
+                controller: HiP4.Controllers.PhotoController,
                 controllerAs: 'controller'
             })
+            
         //    .state('notFound', {
         //        url: '/notFound',
         //        templateUrl: '/ngApp/views/notFound.html'

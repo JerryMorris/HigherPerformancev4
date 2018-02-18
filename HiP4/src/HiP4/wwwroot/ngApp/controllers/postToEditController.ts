@@ -7,7 +7,7 @@
         constructor(private postsService: HiP4.Services.PostsService,
             private $state: angular.ui.IStateService,
             $stateParams: angular.ui.IStateParamsService) {
-            this.postId = $stateParams["id"]
+            this.postId = $stateParams['id'];
             this.getPost();
         }
         getPost() {
@@ -24,15 +24,18 @@
         }
         postToEdit() {
             console.log(this.post);
+            
             this.postsService.postToEdit(this.post).then(() => {
                 this.$state.go("user");
 
             });
         }
 
-        deletePost(postId) {
+        deletePost(id) {
+            debugger;
+            
             this.postsService.deletePost(this.postId).then(() => {
-                this.$state.go("user");
+                this.$state.go("admin");
             });
         }
         cancel() {

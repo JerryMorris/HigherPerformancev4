@@ -8,14 +8,14 @@
 
         savePost() {
             this.postsService.savePost(this.post).then(() => {
-                this.$state.go("posts");
+                this.$state.go("home");
                 
             });
             
         }
        
         cancel() {
-            this.$state.go("posts");
+            this.$state.go("home");
             
         }
 

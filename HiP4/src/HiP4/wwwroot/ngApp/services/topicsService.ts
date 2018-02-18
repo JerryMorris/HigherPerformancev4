@@ -4,12 +4,20 @@
 
         private topicResource;
 
-        public listPosts() {
+        constructor($resource: ng.resource.IResourceService)
+        {
+            this.topicResource = $resource('/api/topics/:id', null);
+        }
+
+        public listTopics()
+        {
+            debugger;
             return this.topicResource.query();
         }
 
-        public savePosts(make) {
-            return this.topicResource.save(make).$promise;
-        }
+        //public savePosts(make) {
+        //    return this.topicResource.save(make).$promise;
+        //}
     }
+    angular.module('HiP4').service('topicsService', TopicsService);
 }
