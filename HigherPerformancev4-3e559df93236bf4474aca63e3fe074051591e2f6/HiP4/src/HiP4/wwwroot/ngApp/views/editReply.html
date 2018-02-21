@@ -1,0 +1,17 @@
+﻿<h1>Post Edit</h1>
+<form ng-submit="controller.saveReply()">
+    <div class="form-group">
+        <label for="title" class="col-lg-2 control-label">Title</label>
+        <input type="text" class="form-control" value="{{controller.reply.title}}" ng-model="controller.reply.title" />
+    </div>
+    
+        <div class="form-group">
+            <label for="textArea" class="col-lg-2 control-label">Message</label>
+            <div class="col-lg-10">
+                <textarea class="form-control" rows="3" value="{{controller.reply.message}}" ng-model="{{controller.reply.message}}"></textarea>
+
+            </div>
+            </div>
+            <input type="submit" value="save" />
+            <input type="button" ng-click="controller.cancel()" value="Cancel" />
+</form>

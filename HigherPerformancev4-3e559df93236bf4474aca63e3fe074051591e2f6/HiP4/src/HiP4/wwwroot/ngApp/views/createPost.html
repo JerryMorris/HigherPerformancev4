@@ -1,0 +1,46 @@
+﻿
+<h1>Create Post</h1>
+<form ng-submit="controller.savePost()">
+    <div>
+        <div class="form-group">
+            <label for="title" class="col-lg-2 control-label">Title</label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control"  ng-model="controller.post.title" />
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="textArea" class="col-lg-2 control-label">Message</label>
+        <div class="col-lg-10">
+            <textarea  class="form-control" rows="3"  ng-model="controller.post.message"></textarea >
+
+        </div>
+    </div>
+    <div>
+
+        <div class="form-group">
+            <label for="select" class="col-lg-2 control-label">Category</label>
+            <div class="col-lg-10">
+                <select class="form-control" id="select" ng-model="controller.post.category" >
+                    <option value="General">General</option>
+                    <option value="Body">Body</option>
+                    <option value="Chassis">Chassis</option>
+                    <option value="Drive Train">Drive Train</option>
+                    <option value="Electrical">Electrical</option>
+                    <option value="Engine">Engine</option>
+                    <option value="Interior">Interior</option>
+                    <option value="Suspension">Suspension</option>
+                    <option value="Wheels and Tires">Wheels and Tires</option>
+                    <option value="Sell or Trade">Sell or Trade</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-10 col-lg-offset-6">
+            <input class="btn btn-primary" type="submit" value="create" />
+            <input class="btn btn-warning" type="button" ng-click="controller.cancel()" value="Cancel" />
+        </div>
+    </div>
+</form>
+
