@@ -16,7 +16,6 @@ namespace HiP4.Controllers {
         {
             this.postId = this.$stateParams['id'];
             this.getUserPost();
-            this.getPostReply();
         }
 
         public getUserPost()
