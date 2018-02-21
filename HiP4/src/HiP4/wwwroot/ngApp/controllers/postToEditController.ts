@@ -6,7 +6,7 @@
 
         constructor(private postsService: HiP4.Services.PostsService,
             private $state: angular.ui.IStateService,
-            $stateParams: angular.ui.IStateParamsService) {
+            private $stateParams: angular.ui.IStateParamsService) {
             this.postId = $stateParams['id'];
             this.getPost();
         }
@@ -15,21 +15,16 @@
         }
 
 
-        savePost() {
-            this.postsService.savePost(this.post).then(() => {
-                this.$state.go("posts");
+        savePost()
+        {
+            debugger;
+            this.postsService.updatePost(this.post).then(() => {
+                this.$state.go("home");
 
             });
 
         }
-        postToEdit() {
-            console.log(this.post);
-            
-            this.postsService.postToEdit(this.post).then(() => {
-                this.$state.go("user");
-
-            });
-        }
+        
 
         deletePost(id) {
             debugger;
@@ -39,7 +34,7 @@
             });
         }
         cancel() {
-            this.$state.go("posts");
+            this.$state.go("home");
         }
     }
 }

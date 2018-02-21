@@ -20,7 +20,7 @@
             
             this.topicId = $stateParams['id'];
             this.getTopics();
-            this.getUserPost();
+            
             
 
         }
@@ -35,11 +35,7 @@
             this.posts = this.postsService.getPostbyTopicId(topicId.id);
         }
 
-        public getUserPost()
-        {
-            this.post = this.postsService.getUserPosts();
-           
-        }
+        
 
     }
 

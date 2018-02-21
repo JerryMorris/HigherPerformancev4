@@ -27,14 +27,14 @@ namespace HiP4.Services
 
         public List<Posts> GetPostByTopicId(int topicId)
         {
-            var posts = _repo.Query<Posts>().Where(p => p.TopicId == topicId).ToList();
+            var posts = _repo.Query<Posts>().Where(p => p.TopicId == topicId).Where(p => p.IsActive == true).ToList();
 
             return posts;
         }
         //get user post
         public List<Posts> GetUserPosts(string id)
         {
-            var posts = _repo.Query<Posts>().Where(p => p.User == id).ToList();
+            var posts = _repo.Query<Posts>().Where(p => p.User == id).Where(p => p.IsActive == true).ToList();
 
 
             return posts;

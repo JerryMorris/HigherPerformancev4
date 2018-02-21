@@ -10,7 +10,7 @@ namespace HiP4 {
             .state('home', {
                 url: '/',
                 templateUrl: '/ngApp/views/home.html',
-                controller: HiP4.Controllers.TopicsController,
+                controller: HiP4.Controllers.HomeController,
                 controllerAs: 'controller'
             })
             .state('secret', {

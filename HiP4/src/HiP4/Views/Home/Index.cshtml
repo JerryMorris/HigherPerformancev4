@@ -24,10 +24,11 @@
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="/">Home</a></li>
                     <li><a href="/posts/create">Post</a></li>
+                    <li><a href="/posts">Search</a></li>
                     <li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                    <li><a href="/register" ng-show="!account.isLoggedIn()"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
                     <li><a href="/login" ng-show="!account.isLoggedIn()"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                     <li><a href="#" ng-click="account.logout()" ng-show="account.isLoggedIn()">Logout</a></li>
                 </ul>
@@ -79,7 +80,7 @@
     <script src="~/ngApp/controllers/replyController.js"></script>
     <script src="~/ngApp/controllers/CreatePostController.js"></script>
     <script src="~/ngApp/controllers/postToEditController.js"></script>
-
+    <script src="~/ngApp/controllers/postDeleteController.js"></script>
     <script src="~/ngApp/controllers/viewPostController.js"></script>
     <script src="~/ngApp/controllers/createReplyController.js"></script>
 
